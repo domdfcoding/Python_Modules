@@ -23,51 +23,51 @@
 #  
 # A collection of common python functions
 # Current list:
-#       clear()         clears the terminal window
-#       br()            prints a line break in the terminal
-#       isint(number)   Check if a number is a integer
-#       delete(file)    Delete the file in the current directory
+#		clear()			clears the terminal window
+#		br()			prints a line break in the terminal
+#		isint(number)	Check if a number is a integer
+#		delete(file)	Delete the file in the current directory
 #
- 
+
 import os
- 
-def clear():                                # clear the display
-    os.system('cls' if os.name == 'nt' else 'clear')
-    # works for Windows and UNIX, but does not clear Python Shell
-     
-def br():                                   # Line Break
-    print("")
-     
-def isint(num): # Only works with floating point numbers
-    if num == int(num):
-        return True
-    else:
-        return False
- 
-def delete(filename):   # Delete the file 'filename' in the current directory
-    os.remove(os.path.join(os.getcwd(),filename))
- 
-def write(var, filename):   # Write a variable to file in the current directory
-    with open(os.path.join(os.getcwd(), filename),'w') as f:
-        f.write(var)
-     
+
+def clear():								# clear the display
+	os.system('cls' if os.name == 'nt' else 'clear')
+	# works for Windows and UNIX, but does not clear Python Shell
+	
+def br():									# Line Break
+	print("")
+	
+def isint(num):	# Only works with floating point numbers
+	if num == int(num):
+		return True
+	else:
+		return False
+
+def delete(filename):	# Delete the file 'filename' in the current directory
+	os.remove(os.path.join(os.getcwd(),filename))
+
+def write(var, filename):	# Write a variable to file in the current directory
+	with open(os.path.join(os.getcwd(), filename),'w') as f:
+		f.write(var)
+	
 def module_version():
-    module_version = "1.0"
-    print("""
+	module_version = "1.0"
+	print("""
 Python Common Functions Module v1.0
 Copyright (C) Dominic Davis-Foster 2014
 <domdfcoding@gmail.com>
 Use "functions()" for a full list of functions available.
 """)
- 
+
 def functions():
-    print("""
-clear()         Clears the terminal window
-br()            Prints a line break in the terminal
-isint(number)   Check if a number is a integer
-delete(file)    Delete the file in the current directory
- 
+	print("""
+clear()			Clears the terminal window
+br()			Prints a line break in the terminal
+isint(number)	Check if a number is a integer
+delete(file)	Delete the file in the current directory
+
 """)
- 
- 
+
+
 # End of module
