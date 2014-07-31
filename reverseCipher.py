@@ -10,26 +10,32 @@
 import time, os
 
 import sys; version = int((sys.version) [0])		# Determines Python version
-try:
-	from common import *
-except ImportError:
-	
-	if version == 2:
-		import urllib
-	elif version == 3:
-		import urllib.request as urllib
-	urllib.urlretrieve ("https://www.dropbox.com/s/osqppbk7z15oloi/common.py?dl=1", "common.py")
-	from common import *
-try:
-	import pyperclip
-except ImportError:
-	
-	if version == 2:
-		import urllib
-	elif version == 3:
-		import urllib.request as urllib
-	urllib.urlretrieve ("https://www.dropbox.com/s/kaegxps1soimg30/pyperclip.py?dl=1", "pyperclip.py")
-	import pyperclip
+err = 'N'; print 'Trying to update modules: ',
+for module in ('common', 'pyperclip'):
+	try:
+		import socket
+		# Trys to connect to the internet
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		s.connect(("google.com",80))
+		s.close()						# Closes the connection to google
+		# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
+		if version == 2:
+			import urllib
+		elif version == 3:
+			import urllib.request as urllib
+		name = module + ".py"
+		address = "https://raw.githubusercontent.com/domdfcoding/Python_Modules/master/" + name
+		urllib.urlretrieve (address, name)
+	except socket.gaierror or LookupError:
+		print '/nUnable to update module' + module; err = 'Y'
+	import importlib
+	try:
+		importlib.import_module(module)
+	except ImportError:
+		quit()
+if err != 'Y': 	print 'Done'
+from common import *
+import pyperclip
 
 def MESSAGE():
 	message = input('Message: ')	# The string to be excrypted or decrypted

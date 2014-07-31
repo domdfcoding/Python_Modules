@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Caesar Cipher  
+# Improved Caesar Reverse Cipher  
 # http://inventwithpython.com/hacking (BSD Licensed) 
 #
 
-import pickle, os, time
+import os, time
 
 import sys; version = int((sys.version) [0])		# Determines Python version
 err = 'N'; print 'Trying to update modules: ',
@@ -32,30 +32,32 @@ for module in ('common', 'pyperclip'):
 	except ImportError:
 		quit()
 if err != 'Y': 	print 'Done'
-from common import *
 import pyperclip
-	
+from common import *
+
+filepath = os.path.realpath(__file__)
 clear()
 # Every possible symbol that can be encrypted
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+LETTERS = "^o(7=rb)9q\"UC<AuJ[K2D6Zk\'}QdGt4.0|LTXS-$;1/!g#3Ohf@*BiV,aEcwvj&xI_MFls{+]8e~5\x80Ymy?\'>N\xa3R:%pPHWzn"
 
 def MESSAGE():
 	message = input('Message: ')	# The string to be excrypted or decrypted
 	if message == '': print('Enter a message!'); os.system(filepath)
 	clear()							# Clears the screen for security
-	message = message.upper()		# Capitalise the string in message
 	return message
 
 def KEY(): # The excryption/decryption key
 	global LETTERS
-	while True:		# Only proceed is a valid key is given
+	while True:		# Only proceed if a valid key is given
 		print('Choose an encryption key between 0 and ' + str(len(LETTERS)-1))
 		try: inp = int(input('Encryption Key: '))	# Gets Key
 		except ValueError: 		# If the key is not a number ask again
 			clear(); print('Invalid Key')
 		# Checks that the key is valid and clears the screen for security
 		if 0 <= inp <= (len(LETTERS)-1):
-			key = inp; clear(); break	
+			key = inp; clear(); break
+		elif inp == 50:
+			clear(); print('Key Does Not Work')	
 		else:					# If the key is out of range ask again
 			clear(); print('Invalid Key')	
 	return key
@@ -69,19 +71,19 @@ def MODE(): # Tells the program whether to encrypt or decrypt
 		else: clear(); print('Invalid Mode')
 	return mode
 
-def encrypt(key, message, mode):
+def encrypt(key, message, mode): # Run the encryption/decryption code on each symbol in the message string
+	translated = ''; mirrored = ''
 	global LETTERS
-	translated = '' 	# Stores the encrypted/decrypted form of the message
-	
-	# Run the encryption/decryption code on each symbol in the message string
 	for symbol in message:
 		if symbol in LETTERS:
 			# Get the encrypted or decrypted number for this symbol
 			num = LETTERS.find(symbol)
-			if mode == 'e':
+			if str(mode) == 'e':
 				num = num + key
-			elif mode == 'd':
+			elif str(mode) == 'd':
 				num = num - key
+			else: print('error'); os.system('pause')
+			
 			
 	# handle the wrap around if num is larger than the length of LETTERS or less than 0
 			if num >= len(LETTERS):
@@ -89,21 +91,24 @@ def encrypt(key, message, mode):
 			elif num < 0:
 				num = num + len(LETTERS)
 				
-			# add encrypted/decrypted number's symbol at the end of translated
+			# add encrypted/decrypted number's symbol at the end of translate
 			translated = translated + LETTERS[num]
 			
 		else:
 			# just add the symbol without encrypting or decrypting
 			translated = translated + symbol
-	return translated
 
-def main():
+	i = len(translated) - 1
+	while i >= 0:
+		mirrored = mirrored + translated[i]
+		i = i - 1
+	return mirrored
+
+def main():	# save the encrypted/decrypted string to file
 	message = MESSAGE(); key = KEY(); mode = MODE()
 	ciphertext = encrypt(key, message, mode)
-	
-	print(ciphertext)
-	
-	# copy the encrypted/decrypted string to the clipboard
+			
+	# Copy the encrypted string in ciphertext to the clipboard.
 	pyperclip.copy(ciphertext)
 	
 	write(ciphertext, 'cipher.txt')
