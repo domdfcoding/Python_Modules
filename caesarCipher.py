@@ -8,34 +8,37 @@
 import pickle, os, time
 
 import sys; version = int((sys.version) [0])		# Determines Python version
-err = 'N'; print 'Trying to update modules: ',
-for module in ('common', 'pyperclip'):
-	try:
-		import socket
-		# Trys to connect to the internet
-		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		s.connect(("google.com",80))
-		s.close()						# Closes the connection to google
-		# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
-		if version == 2:
-			import urllib
-		elif version == 3:
-			import urllib.request as urllib
-		name = module + ".py"
-		address = "https://raw.githubusercontent.com/domdfcoding/Python_Modules/master/" + name
-		urllib.urlretrieve (address, name)
-	except socket.gaierror or LookupError:
-		print '/nUnable to update module' + module; err = 'Y'
-	import importlib
-	try:
-		importlib.import_module(module)
-	except ImportError:
-		quit()
-if err != 'Y': 	print 'Done'
+# remember to add ,end='' if using python 3
+if __name__ == '__main__':
+	err = 'N'; print('Trying to update modules: ',end=''),
+	for module in ('common', 'pyperclip'):
+		try:
+			import socket
+			# Trys to connect to the internet
+			s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+			s.connect(("google.com",80))
+			s.close()						# Closes the connection to google
+			# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
+			if version == 2:
+				import urllib
+			elif version == 3:
+				import urllib.request as urllib
+			name = module + ".py"
+			address = "https://raw.githubusercontent.com/domdfcoding/Python_Modules/master/" + name
+			urllib.urlretrieve (address, name)
+		except socket.gaierror or LookupError:
+			print('\nUnable to update module' + module); err = 'Y'
+		import importlib
+		try:
+			globals()[module] = importlib.import_module(module)
+		except ImportError:
+			sys.exit()
+	if err != 'Y': 	print('Done')
+else:
+	import pyperclip
 from common import *
-import pyperclip
-	
 clear()
+
 # Every possible symbol that can be encrypted
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
