@@ -1,4 +1,8 @@
-import Tkinter as tkinter
+import sys; version = int((sys.version) [0])		# Determines Python version
+if version == 2:
+	import Tkinter as tkinter
+elif version == 3:
+	import tkinter
 
 class MessageBox(object):
 
