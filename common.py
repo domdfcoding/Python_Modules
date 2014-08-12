@@ -19,7 +19,8 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
-#  
+#
+# Portions of code from http://inventwithpython.com/hacking (BSD Licensed)   
 #  
 
 def functions():
@@ -36,6 +37,7 @@ Current list:
     lcm([num1,num2,...])
                      Find the lowest common multiple of a list of numbers
     hcf and hcf2     Highest common factor - pseudonyms for gcd
+    modInverse(a,m)  Mod inverse of 'a' mod 'm'
     pause()          Pause
     close()          Close
     pexit()          Pause then close
@@ -89,6 +91,16 @@ def hcf(a,b):
 
 def hcf2(numbers):
 	gcd2(numbers)
+	
+def modInverse(a,m):  # Inverse of 'a' mod 'm'
+	if gcd(a,m) != 1:
+		return None # No mod inverse exists if a & m aren't relatively prime
+	u1, u2, u3 = 1, 0, a
+	v1, v2, v3 = 0, 1, m
+	while v3 != 0:
+		q = u3 // v3 # // forces integer division in Python 3
+		v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
+	return u1 % m
 	
 def pause():
 	os.system('pause')
