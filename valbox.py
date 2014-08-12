@@ -2,11 +2,9 @@ import sys; version = int((sys.version) [0])		# Determines Python version
 if version == 2:
 	import Tkinter as tkinter
 	from Tkinter import *
-	#from Tkinter import simpledialog
 elif version == 3:
 	import tkinter
 	from tkinter import *
-	#from tkinter import simpledialog
 
 class inputDialog:
 
