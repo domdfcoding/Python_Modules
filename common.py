@@ -50,6 +50,11 @@ def delete(filename):	# Delete the file 'filename' in the current directory
 def write(var, filename):	# Write a variable to file in the current directory
 	with open(os.path.join(os.getcwd(), filename),'w') as f:
 		f.write(var)
+		
+def gcd(a, b):
+	while a != 0:
+		a, b = b % a, a
+	return b
 	
 def module_version():
 	module_version = "1.0"
