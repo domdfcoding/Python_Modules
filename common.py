@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  commmon.py
+#  commmon.py		A collection of common python functions
 #  
 #  Copyright (C) Dominic Davis-Foster 2014 <domdfcoding@gmail.com>
 #  
@@ -21,13 +21,20 @@
 #  MA 02110-1301, USA.
 #  
 #  
-# A collection of common python functions
-# Current list:
-#		clear()			clears the terminal window
-#		br()			prints a line break in the terminal
-#		isint(number)	Check if a number is a integer
-#		delete(file)	Delete the file in the current directory
-#
+
+def functions():
+	print("""
+Current list:
+    clear()          Clears the terminal window
+    br()             Prints a line break in the terminal
+    isint(number)    Check if a number is a integer
+    delete(file)     Delete the file in the current directory
+    write(var file)  Write a variable to file in the current directory
+    gcd(num1, num2)  Find the greatest common divisor of two numbers
+    pause()          Pause
+    close()          Close
+    pexit()          Pause then close
+""")
 
 import os
 
@@ -56,6 +63,16 @@ def gcd(a, b):
 		a, b = b % a, a
 	return b
 	
+def pause():
+	os.system('pause')
+
+def close():
+	raise SystemExit
+	
+def pexit():
+	pause()
+	close()
+	
 def module_version():
 	module_version = "1.0"
 	print("""
@@ -65,14 +82,10 @@ Copyright (C) Dominic Davis-Foster 2014
 Use "functions()" for a full list of functions available.
 """)
 
-def functions():
-	print("""
-clear()			Clears the terminal window
-br()			Prints a line break in the terminal
-isint(number)	Check if a number is a integer
-delete(file)	Delete the file in the current directory
-
-""")
-
-
 # End of module
+
+if __name__ == '__main__':
+	module_version()
+	functions()
+	print("Use 'from common import *' to simplify calling the modules.\nThen simply type the function name")
+	pexit()
