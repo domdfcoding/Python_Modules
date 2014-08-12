@@ -37,7 +37,6 @@ class inputDialog:
 
 	def ok(self):
 
-		print("value is " + self.e.get())
 		self.result = self.e.get()
 		self.top.destroy()
 
