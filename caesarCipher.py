@@ -39,6 +39,8 @@ else:
 from common import *
 clear()
 
+filepath = os.path.realpath(__file__)
+
 # Every possible symbol that can be encrypted
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 

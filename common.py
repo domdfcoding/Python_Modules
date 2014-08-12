@@ -66,17 +66,20 @@ def write(var, filename):	# Write a variable to file in the current directory
 		f.write(var)
 		
 def gcd(a, b):
+	# Returns the GCD (HCF) of a and b using Euclid's Algorithm
 	while a != 0:
 		a, b = b % a, a
 	return b
 	
 def gcd2(numbers):
+	# Returns the GCD (HCF) of a list of numbers using Euclid's Algorithm
 	c = numbers[0]
 	for i in range(1, (len(numbers))):
 		c = gcd(c,numbers[i])
 	return c
 	
 def lcm(numbers):
+	# Returns the LCM of a list of numbers using Euclid's Algorithm
 	product = numbers[0]
 	for i in range(1, len(numbers)):
 		product = product * numbers[i]
@@ -92,9 +95,13 @@ def hcf(a,b):
 def hcf2(numbers):
 	gcd2(numbers)
 	
-def modInverse(a,m):  # Inverse of 'a' mod 'm'
+def modInverse(a,m):  # Returns the modular inverse of a % m,
+	# which is the number x such that a*x % m = 1
 	if gcd(a,m) != 1:
 		return None # No mod inverse exists if a & m aren't relatively prime
+	
+	
+	# Calculation using thr Extended Euclidean Algorithm
 	u1, u2, u3 = 1, 0, a
 	v1, v2, v3 = 0, 1, m
 	while v3 != 0:
