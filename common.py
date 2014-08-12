@@ -31,6 +31,11 @@ Current list:
     delete(file)     Delete the file in the current directory
     write(var file)  Write a variable to file in the current directory
     gcd(num1, num2)  Find the greatest common divisor of two numbers
+    gcd2([num1,num2,...])
+                     Find the greatest common diviser of a list of numbers
+    lcm([num1,num2,...])
+                     Find the lowest common multiple of a list of numbers
+    hcf and hcf2     Highest common factor - pseudonyms for gcd
     pause()          Pause
     close()          Close
     pexit()          Pause then close
@@ -62,6 +67,28 @@ def gcd(a, b):
 	while a != 0:
 		a, b = b % a, a
 	return b
+	
+def gcd2(numbers):
+	c = numbers[0]
+	for i in range(1, (len(numbers))):
+		c = gcd(c,numbers[i])
+	return c
+	
+def lcm(numbers):
+	product = numbers[0]
+	for i in range(1, len(numbers)):
+		product = product * numbers[i]
+	gcd=gcd2(numbers)
+	lcm = product/gcd
+	if product%gcd == 0:
+		return lcm
+	else: return product
+	
+def hcf(a,b):
+	gcd(a,b)
+
+def hcf2(numbers):
+	gcd2(numbers)
 	
 def pause():
 	os.system('pause')
