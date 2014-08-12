@@ -46,10 +46,14 @@ class inputDialog:
 root = Tk()
 root.withdraw()
 
-def valbox(position='top', windowname="Value", label="Value"):
+def valbox(position='top', windowname="Value", label="Value", cancel='quit'): 
+	""" quit to close; return to continue program.
+	if using return, cancel the operation if None returned.
+	e.g. variable=valbox(); if variable != None: do something with variable """
 	d = inputDialog(root, position, windowname, label)
 	root.wait_window(d.top)
 	try:
 		return d.result
 	except AttributeError:
-		raise SystemExit
+		if cancel == 'quit': raise SystemExit
+		elif cancel == 'return': return None
