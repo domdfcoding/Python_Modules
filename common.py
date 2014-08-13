@@ -112,12 +112,15 @@ def modInverse(a,m):  # Returns the modular inverse of a % m,
 def pause():
 	os.system('pause')
 
-def close():
-	raise SystemExit
+def close(message=''):
+	if message == '':
+		raise SystemExit
+	else:
+		sys.exit(message)
 	
-def pexit():
+def pexit(message=''):
 	pause()
-	close()
+	close(message)
 	
 def module_version():
 	module_version = "1.0"
