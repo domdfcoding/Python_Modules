@@ -41,9 +41,15 @@ Current list:
     pause()          Pause
     close()          Close
     pexit()          Pause then close
+    prt('something') Print on the same line
+    crt('something',x)    Print over the content on the line,
+                       followed by x number of spaces
+    interrupt()      Print what to do to abort the script; 
+                       dynamic depending on OS
 """)
 
-import os
+import os, sys
+version = int(sys.version[0])		# Python Version
 
 def clear():								# clear the display
 	os.system('cls' if os.name == 'nt' else 'clear')
@@ -121,20 +127,30 @@ def close(message=''):
 def pexit(message=''):
 	pause()
 	close(message)
+
+def prt(somethingToPrint):
+	sys.stdout.write(somethingToPrint)
+	sys.stdout.flush()
+
+def crt(somethingToPrint, num=4):
+	print('\r' + somethingToPrint + ' '*num)
 	
-def module_version():
+def interrupt():
+	print('(Press Ctrl-%s to quit at any time.)' % 'C' if os.name == 'nt' else 'D')
+	
+def module_version(x=1):
 	module_version = "1.0"
-	print("""
-Python Common Functions Module v1.0
+	print("""Python Common Functions Module v1.0
 Copyright (C) Dominic Davis-Foster 2014
-<domdfcoding@gmail.com>
-Use "functions()" for a full list of functions available.
-""")
+<domdfcoding@gmail.com>""")
+	if x == 1:
+		print('Use "functions()" for a full list of functions available.')
 
 # End of module
 
 if __name__ == '__main__':
-	module_version()
+	module_version(0)
 	functions()
-	print("Use 'from common import *' to simplify calling the modules.\nThen simply type the function name")
+	print("Use 'from common import *' to simplify calling the modules.\nThen simply type the function name")  
 	pexit()
+	
