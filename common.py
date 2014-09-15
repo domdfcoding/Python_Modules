@@ -26,29 +26,42 @@
 def functions():
 	print("""
 Current list:
-    clear()          Clears the terminal window
-    br()             Prints a line break in the terminal
-    isint(number)    Check if a number is a integer
-    delete(file)     Delete the file in the current directory
-    write(var file)  Write a variable to file in the current directory
-    gcd(num1, num2)  Find the greatest common divisor of two numbers
-    gcd2([num1,num2,...])
-                     Find the greatest common diviser of a list of numbers
-    lcm([num1,num2,...])
-                     Find the lowest common multiple of a list of numbers
-    hcf and hcf2     Highest common factor - pseudonyms for gcd
-    modInverse(a,m)  Mod inverse of 'a' mod 'm'
-    pause()          Pause
-    close()          Close
-    pexit()          Pause then close
-    prt('something') Print on the same line
-    crt('something',x)    Print over the content on the line,
-                       followed by x number of spaces
-    interrupt()      Print what to do to abort the script; 
-                       dynamic depending on OS
+	clear()          Clears the terminal window
+	br()             Prints a line break in the terminal
+	isint(number)    Check if a number is a integer
+	delete(file)     Delete the file in the current directory
+	write(var file)  Write a variable to file in the current directory
+	gcd(num1, num2)  Find the greatest common divisor of two numbers
+	gcd2([num1,num2,...])
+					 Find the greatest common diviser of a list of numbers
+	lcm([num1,num2,...])
+					 Find the lowest common multiple of a list of numbers
+	hcf and hcf2     Highest common factor - pseudonyms for gcd
+	modInverse(a,m)  Mod inverse of 'a' mod 'm'
+	pause()          Pause
+	close()          Close
+	pexit()          Pause then close
+	prt('something') Print on the same line
+	crt('something',x)    Print over the content on the line,
+					   followed by x number of spaces
+	interrupt()      Print what to do to abort the script; 
+					   dynamic depending on OS
+	restart_program()     Restarts the Program
+	splitLen(string,x)    Split a string every x characters
+    readOutput(command)   Read the stdout of the command
+	timeoutInput(prompt,timeout)     Input with a timeout
+
+	
 """)
 
-import os, sys
+def restart_program():				# restarts the program
+    """Restarts the current program.
+    Note: this function does not return. Any cleanup action (like
+    saving data) must be done before calling this function."""
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+import os, sys, msvcrt, time
 version = int(sys.version[0])		# Python Version
 
 def clear():								# clear the display
@@ -57,6 +70,13 @@ def clear():								# clear the display
 	
 def br():									# Line Break
 	print("")
+	
+def clearprint(textToPrint,newline=True):
+	clear()
+	if version == 2 and newline==False:
+		print textToPrint,
+	if version == 3 and newline==False:
+		print(textToPrint,end='')
 	
 def isint(num):	# Only works with floating point numbers
 	if num == int(num):
@@ -69,6 +89,14 @@ def delete(filename):	# Delete the file 'filename' in the current directory
 
 def write(var, filename):	# Write a variable to file in the current directory
 	with open(os.path.join(os.getcwd(), filename),'w') as f:
+		f.write(var)
+
+def read(filename):	# Read a file in the current directory; Untested
+	with open(os.path.join(os.getcwd(), filename)) as f:
+		return f.read()
+		
+def append(var, filename):	# Read a file in the current directory; Untested
+	with open(os.path.join(os.getcwd(), filename), 'a') as f:
 		f.write(var)
 		
 def gcd(a, b):
@@ -107,7 +135,7 @@ def modInverse(a,m):  # Returns the modular inverse of a % m,
 		return None # No mod inverse exists if a & m aren't relatively prime
 	
 	
-	# Calculation using thr Extended Euclidean Algorithm
+	# Calculation using the Extended Euclidean Algorithm
 	u1, u2, u3 = 1, 0, a
 	v1, v2, v3 = 0, 1, m
 	while v3 != 0:
@@ -137,6 +165,29 @@ def crt(somethingToPrint, num=4):
 	
 def interrupt():
 	print('(Press Ctrl-%s to quit at any time.)' % 'C' if os.name == 'nt' else 'D')
+	
+def splitLen(string,n):
+	return [string[i:i+n] for i in range(0,len(string),n)]
+
+def readOutput(command):
+	import subprocess
+	return subprocess.Popen(command,stdout=subprocess.PIPE).stdout.readline()
+
+def timeoutInput(prompt, timeout=30.0):
+	sys.stdout.write(prompt) 
+	finishat = time.time() + timeout
+	result = []
+	while True:
+		if msvcrt.kbhit():
+			result.append(msvcrt.getche())
+			if result[-1] == '\r':   # or \n, whatever Win returns;-)
+				print('')
+				return 'input'
+			time.sleep(0.1)          # just to yield to other processes/threads
+		else:
+			if time.time() > finishat:
+			   print('')
+			   return 'no_input'
 	
 def module_version(x=1):
 	module_version = "1.0"
