@@ -73,11 +73,10 @@ def br():									# Line Break
 	
 def clearprint(textToPrint,newline=True):
 	clear()
-	if version == 2 and newline==False:
-		print textToPrint,
-	if version == 3 and newline==False:
-		print(textToPrint,end='')
-	
+	prt(textToPrint)
+	if newline == True:
+		sys.stdout.write('\n')
+
 def isint(num):	# Only works with floating point numbers
 	if num == int(num):
 		return True
