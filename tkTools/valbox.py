@@ -1,10 +1,5 @@
-import sys; version = int((sys.version) [0])		# Determines Python version
-if version == 2:
-	import Tkinter as tkinter
-	from Tkinter import *
-elif version == 3:
-	import tkinter
-	from tkinter import *
+import tkinter
+from tkinter import *
 
 class inputDialog:
 

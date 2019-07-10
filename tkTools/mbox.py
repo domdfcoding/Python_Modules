@@ -1,8 +1,4 @@
-import sys; version = int((sys.version) [0])		# Determines Python version
-if version == 2:
-	import Tkinter as tkinter
-elif version == 3:
-	import tkinter
+import tkinter
 
 class MessageBox(object):
 
@@ -147,5 +143,5 @@ def mbox(msg, b1='', b2='', b3='',b4='',b5='', frame=True, t=False, entry=False)
 	msgbox.root.destroy()
 	return msgbox.returning
 	
-   #='OK'='Cancel'
+#='OK'='Cancel'
 
