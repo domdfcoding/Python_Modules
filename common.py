@@ -26,7 +26,6 @@ A collection of common python functions
 # Portions of code from http://inventwithpython.com/hacking (BSD Licensed)   
 #
 
-# import msvcrt
 import os
 import sys
 import time
@@ -65,7 +64,7 @@ version = pyversion  # Python Version
 def clearprint(textToPrint, newline=True):
 	clear()
 	prt(textToPrint)
-	if newline == True:
+	if newline:
 		sys.stdout.write('\n')
 
 
@@ -100,6 +99,8 @@ def readOutput(command):
 
 
 def timeoutInput(prompt, timeout=30.0):
+	import msvcrt
+
 	sys.stdout.write(prompt)
 	finishat = time.time() + timeout
 	result = []
