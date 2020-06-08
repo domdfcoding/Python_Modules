@@ -5,23 +5,20 @@
 #   import detectEnglish
 #   detectEnglish.isEnglish(someString) # returns True or False
 
+import socket
+
 from domdf_python_tools.utils import pyversion as version
 
-try:
-	import socket
-
-	# Trys to connect to the internet
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	s.connect(("google.com", 80))
-	s.close()  # Closes the connection to google
-	# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
-	if version == 2:
-		import urllib
-	elif version == 3:
-		import urllib.request as urllib
-	urllib.urlretrieve('http://invpy.com/dictionary.txt', 'dictionary.txt')
-except socket.gaierror or LookupError:
-	print()
+# Trys to connect to the internet
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("google.com", 80))
+s.close()  # Closes the connection to google
+# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
+if version == 2:
+	import urllib
+elif version == 3:
+	import urllib.request as urllib
+urllib.urlretrieve('http://invpy.com/dictionary.txt', 'dictionary.txt')
 
 UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'

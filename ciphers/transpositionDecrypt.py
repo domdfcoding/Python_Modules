@@ -58,9 +58,9 @@ def main():
 	clear()
 	plaintext = decryptMessage(myKey, myMessage)  # The decryption
 
-	"""Print the encrypted string in ciphertext to the screen, with
-	a | (called "pipe" character) before and after it in case there are 
-	spaces at the end of the encrypted message."""
+	# Print the encrypted string in ciphertext to the screen, with
+	# a | (called "pipe" character) before and after it in case there are
+	# spaces at the end of the encrypted message.
 	print(f"|{plaintext}|")
 
 	# Copy the encrypted string in ciphertext to the clipboard.

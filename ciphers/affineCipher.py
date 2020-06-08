@@ -29,7 +29,7 @@ def check_connection():
 		s.connect(("google.com", 80))
 		s.close()  # Closes the connection to google
 	# Above code from http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib
-	except socket.gaierror or LookupError:
+	except (socket.gaierror, LookupError):
 		raise Exception("Unable to connect to the internet.")  # TODO: proper exception type
 
 
