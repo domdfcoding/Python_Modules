@@ -4,12 +4,14 @@
 # http://inventwithpython.com/hacking (BSD Licensed)
 
 import math
+# remember to add ,end='' if using python 3
+import sys
+import time
 
 from domdf_python_tools.paths import delete, write
 
-# remember to add ,end='' if using python 3
 import pyperclip
-from common import *
+from common import clear
 
 clear()
 
@@ -71,7 +73,7 @@ and is also present as a text file in this folder.""")
 
 	count = 20  # Waits 20 seconds before purge
 	while count > 0:
-		print('\rCopy NOW! Purging in ' + str(count) + ' seconds!', end=''),
+		print('\rCopy NOW! Purging in ' + str(count) + ' seconds!', end='')
 		sys.stdout.flush()
 		time.sleep(1)
 		count = count - 1

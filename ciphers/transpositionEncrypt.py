@@ -5,10 +5,14 @@
 
 # remember to add ,end='' if using python 3
 
+import os
+import sys
+import time
+
 from domdf_python_tools.paths import delete, write
 
 import pyperclip
-from common import *
+from common import clear
 
 filepath = os.path.realpath(__file__)
 clear()

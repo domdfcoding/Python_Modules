@@ -11,7 +11,8 @@ class MessageBox(object):
 		# ctrl+c to copy self.msg
 		root.bind('<Control-c>', func=self.to_clip)
 		# remove the outer frame if frame=False
-		if not frame: root.overrideredirect(True)
+		if not frame:
+			root.overrideredirect(True)
 		# if button is a tuple unpack into the button text & return value
 		if b1 != '':
 			if isinstance(b1, tuple):
@@ -52,7 +53,8 @@ class MessageBox(object):
 			btn_1 = tkinter.Button(frm_2, width=8, text=b1)
 			btn_1['command'] = self.b1_action
 			btn_1.pack(side='left')
-			if not entry: btn_1.focus_set()
+			if not entry:
+				btn_1.focus_set()
 		if b2 != '':
 			btn_2 = tkinter.Button(frm_2, width=8, text=b2)
 			btn_2['command'] = self.b2_action
@@ -92,7 +94,8 @@ class MessageBox(object):
 		# a trick to activate the window (on windows 7)
 		root.deiconify()
 		# if t is specified: call time_out after t seconds
-		if t: root.after(int(t * 1000), func=self.time_out)
+		if t:
+			root.after(int(t * 1000), func=self.time_out)
 
 	def b1_action(self, event=None):
 		try:
