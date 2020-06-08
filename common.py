@@ -26,11 +26,14 @@ A collection of common python functions
 # Portions of code from http://inventwithpython.com/hacking (BSD Licensed)   
 #
 
-import os, sys, msvcrt, time
+# import msvcrt
+import os
+import sys
+import time
 
 # Imports for legacy support
-from domdf_python_tools.terminal import clear, br, pyversion
-from mathematical.utils import *
+from domdf_python_tools.terminal import clear
+from domdf_python_tools.utils import pyversion
 
 
 def functions():
@@ -47,46 +50,54 @@ def functions():
 	timeoutInput(prompt,timeout)     Input with a timeout
 """)
 
-def restart_program():				# restarts the program
+
+def restart_program():  # restarts the program
 	"""Restarts the current program.
 	Note: this function does not return. Any cleanup action (like
 	saving data) must be done before calling this function."""
 	python = sys.executable
-	os.execl(python, python, * sys.argv)
+	os.execl(python, python, *sys.argv)
 
 
-version = pyversion		# Python Version
+version = pyversion  # Python Version
 
 
-def clearprint(textToPrint,newline=True):
+def clearprint(textToPrint, newline=True):
 	clear()
 	prt(textToPrint)
 	if newline == True:
 		sys.stdout.write('\n')
 
+
 def pause():
 	os.system('pause')
+
 
 def close(message=''):
 	if message == '':
 		raise SystemExit
 	else:
 		sys.exit(message)
-	
+
+
 def pexit(message=''):
 	pause()
 	close(message)
+
 
 def prt(somethingToPrint):
 	sys.stdout.write(somethingToPrint)
 	sys.stdout.flush()
 
+
 def crt(somethingToPrint, num=4):
-	print('\r' + somethingToPrint + ' '*num)
-	
+	print('\r' + somethingToPrint + ' ' * num)
+
+
 def readOutput(command):
 	import subprocess
-	return subprocess.Popen(command,stdout=subprocess.PIPE).stdout.readline()
+	return subprocess.Popen(command, stdout=subprocess.PIPE).stdout.readline()
+
 
 def timeoutInput(prompt, timeout=30.0):
 	sys.stdout.write(prompt)
