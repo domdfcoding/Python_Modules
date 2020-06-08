@@ -5,16 +5,16 @@
 
 import random
 import socket
-import pyperclip
-from common import *
-from domdf_python_tools.paths import write, delete
+
+from domdf_python_tools.paths import delete, write
 from mathematical.utils import gcd, modInverse
 
-
-from domdf_python_tools.utils import pyversion as version
+import pyperclip
+from common import *
 
 filepath = os.path.realpath(__file__)
 clear()
+
 
 # remember to add ,end='' if using python 3
 
@@ -80,7 +80,8 @@ def MODE():  # Tells the program whether to encrypt or decrypt
 			clear()
 			break
 		else:
-			clear(); print('Invalid Mode')
+			clear()
+			print('Invalid Mode')
 	return mode
 
 
@@ -142,7 +143,7 @@ def checkKeys(keyA, keyB, mode):
 		return None
 	if gcd(keyA, len(SYMBOLS)) != 1:
 		print('Key A (%s) and the symbol set size (%s) are not relatively prime. Choose a different key.' % (
-		keyA, len(SYMBOLS)))
+				keyA, len(SYMBOLS)))
 		return None
 	return 'Valid'
 

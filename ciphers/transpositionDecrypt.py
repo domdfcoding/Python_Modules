@@ -30,7 +30,8 @@ def KEY():  # The excryption/decryption key
 	while True:  # Only proceed is a valid key is given
 		print('Choose the encryption key.')
 		try:
-			key = int(input('Encryption Key: ')); break  # Gets Key
+			key = int(input('Encryption Key: '))  # Gets Key
+			break
 		except ValueError:  # If the key is not a number ask again
 			clear()
 			print('Invalid Key')

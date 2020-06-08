@@ -5,9 +5,10 @@
 # http://inventwithpython.com/hacking (BSD Licensed) 
 #
 
+from domdf_python_tools.paths import delete, write
+
 # remember to add ,end='' if using python 3
 import pyperclip
-from domdf_python_tools.paths import write, delete
 from common import *
 
 clear()
@@ -60,7 +61,8 @@ def MODE():  # Tells the program whether to encrypt or decrypt
 			clear()
 			break
 		else:
-			clear(); print('Invalid Mode')
+			clear()
+			print('Invalid Mode')
 	return mode
 
 
@@ -77,7 +79,8 @@ def encrypt(key, message, mode):  # Run the encryption/decryption code on each s
 			elif str(mode) == 'd':
 				num = num - key
 			else:
-				print('error'); os.system('pause')
+				print('error')
+				os.system('pause')
 
 			# handle the wrap around if num is larger than the length of LETTERS or less than 0
 			if num >= len(LETTERS):

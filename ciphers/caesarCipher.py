@@ -57,10 +57,11 @@ def MODE():  # Tells the program whether to encrypt or decrypt
 		imp = input()
 		if imp.lower()[0] in ('e', 'd'):
 			mode = imp.lower()[0]
-			clear();
+			clear()
 			break
 		else:
-			clear(); print('Invalid Mode')
+			clear()
+			print('Invalid Mode')
 	return mode
 
 
