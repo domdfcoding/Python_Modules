@@ -1,5 +1,6 @@
 import tkinter
 
+
 class MessageBox(object):
 
 	def __init__(self, msg, b1, b2, b3, b4, b5, frame, t, entry):
@@ -12,21 +13,26 @@ class MessageBox(object):
 		# remove the outer frame if frame=False
 		if not frame: root.overrideredirect(True)
 		# if button is a tuple unpack into the button text & return value
-		if b1 != '': 
-			if isinstance(b1, tuple): b1, self.b1_return = b1
-			
-		if b2 != '': 
-			if isinstance(b2, tuple): b2, self.b2_return = b2
-			
-		if b3 != '': 
-			if isinstance(b3, tuple): b3, self.b3_return = b3
-			
-		if b4 != '': 
-			if isinstance(b4, tuple): b4, self.b4_return = b4
-			
-		if b5 != '': 
-			if isinstance(b5, tuple): b5, self.b5_return = b5
-			
+		if b1 != '':
+			if isinstance(b1, tuple):
+				b1, self.b1_return = b1
+
+		if b2 != '':
+			if isinstance(b2, tuple):
+				b2, self.b2_return = b2
+
+		if b3 != '':
+			if isinstance(b3, tuple):
+				b3, self.b3_return = b3
+
+		if b4 != '':
+			if isinstance(b4, tuple):
+				b4, self.b4_return = b4
+
+		if b5 != '':
+			if isinstance(b5, tuple):
+				b5, self.b5_return = b5
+
 		# main frame
 		frm_1 = tkinter.Frame(root)
 		frm_1.pack(ipadx=2, ipady=2)
@@ -42,27 +48,27 @@ class MessageBox(object):
 		frm_2 = tkinter.Frame(frm_1)
 		frm_2.pack(padx=4, pady=4)
 		# buttons
-		if b1 != '': 
+		if b1 != '':
 			btn_1 = tkinter.Button(frm_2, width=8, text=b1)
 			btn_1['command'] = self.b1_action
 			btn_1.pack(side='left')
 			if not entry: btn_1.focus_set()
-		if b2 != '': 
+		if b2 != '':
 			btn_2 = tkinter.Button(frm_2, width=8, text=b2)
 			btn_2['command'] = self.b2_action
 			btn_2.pack(side='left')
-		if b3 != '': 
+		if b3 != '':
 			btn_3 = tkinter.Button(frm_2, width=8, text=b3)
 			btn_3['command'] = self.b3_action
 			btn_3.pack(side='left')
-		if b4 != '': 
+		if b4 != '':
 			btn_4 = tkinter.Button(frm_2, width=8, text=b4)
 			btn_4['command'] = self.b4_action
 			btn_4.pack(side='left')
-		if b5 != '': 
+		if b5 != '':
 			btn_5 = tkinter.Button(frm_2, width=8, text=b5)
 			btn_5['command'] = self.b5_action
-			btn_5.pack(side='left')							
+			btn_5.pack(side='left')
 		# the enter button will trigger the focused button's action
 		if b1 != '':
 			btn_1.bind('<KeyPress-Return>', func=self.b1_action)
@@ -86,10 +92,11 @@ class MessageBox(object):
 		# a trick to activate the window (on windows 7)
 		root.deiconify()
 		# if t is specified: call time_out after t seconds
-		if t: root.after(int(t*1000), func=self.time_out)
+		if t: root.after(int(t * 1000), func=self.time_out)
 
 	def b1_action(self, event=None):
-		try: x = self.entry.get()
+		try:
+			x = self.entry.get()
 		except AttributeError:
 			self.returning = self.b1_return
 			self.root.quit()
@@ -101,12 +108,15 @@ class MessageBox(object):
 	def b2_action(self, event=None):
 		self.returning = self.b2_return
 		self.root.quit()
+
 	def b3_action(self, event=None):
 		self.returning = self.b3_return
 		self.root.quit()
+
 	def b4_action(self, event=None):
 		self.returning = self.b4_return
 		self.root.quit()
+
 	def b5_action(self, event=None):
 		self.returning = self.b5_return
 		self.root.quit()
@@ -115,19 +125,24 @@ class MessageBox(object):
 	# then the close button will act normally
 	#
 	def close_mod(self):
-	    pass
+		pass
 
 	def time_out(self):
-		try: x = self.entry.get()
-		except AttributeError: self.returning = None
-		else: self.returning = x
-		finally: self.root.quit()
+		try:
+			x = self.entry.get()
+		except AttributeError:
+			self.returning = None
+		else:
+			self.returning = x
+		finally:
+			self.root.quit()
 
 	def to_clip(self, event=None):
 		self.root.clipboard_clear()
 		self.root.clipboard_append(self.msg)
 
-def mbox(msg, b1='', b2='', b3='',b4='',b5='', frame=True, t=False, entry=False):
+
+def mbox(msg, b1='', b2='', b3='', b4='', b5='', frame=True, t=False, entry=False):
 	# There is a limit to five (5) options
 	"""Create an instance of MessageBox, and get data back from the user.
 	msg = string to be displayed
@@ -142,6 +157,5 @@ def mbox(msg, b1='', b2='', b3='',b4='',b5='', frame=True, t=False, entry=False)
 	# the function pauses here until the mainloop is quit
 	msgbox.root.destroy()
 	return msgbox.returning
-	
-#='OK'='Cancel'
 
+# ='OK'='Cancel'
